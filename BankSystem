@@ -1,0 +1,90 @@
+using System; namespace lab5
+{
+public class Branch
+{
+public string BranchName; public string city;
+public int code;
+public Branch (String BranchName, String city, int code)
+{
+this.BranchName = BranchName; this.city = city;
+this.code = code;
+}
+public override string ToString()
+{
+return "Branch Name: " + this.BranchName +
+"Branch code: " + this.code + " city: " + this.city ;
+}
+}
+public class Bank {
+private string Name;
+private string Bankcode;
+private Branch [] branchs = new Branch[20]; private int nbbranchs=0;
+public Bank (string Name, string Bankcode) {
+this.Name = Name;
+this.Bankcode = Bankcode;
+}
+public void addBranch (Branch b){
+bool exists = false;
+// at most 20 staff branchs for each bank
+for(int i =0; i<nbbranchs; i++) {
+if (branchs[i].code == b.code){
+exists = true;
+Console.WriteLine("This branch already exists"); break; }
+}
+if (!exists) {
+for (int j = 0; j < branchs.Length;j++) {
+if (nbbranchs <20){
+if (branchs[j] == null){
+branchs[j] = b;
+nbbranchs++;
+Console.WriteLine("new branch is added");
+break; }
+}
+else if ( nbbranchs == 20)
+Console.WriteLine("No more branches is allowed!!"); }
+//Console.ReadKey();
+}
+}
+
+public void RemoveBranh(Branch b ) {
+bool exists = true;
+for (int i = 0; i < branchs.Length; i++) { if (branchs[i] == b){
+branchs[i] = null; // delete
+Console.WriteLine("The Branch with code {0}", b.code + "has been deleted");
+nbbranchs--; exists = false; break;
+}
+}
+if (exists) {
+Console.WriteLine("The Branchwith code {0}", b.code + " not found");}
+Console.ReadKey(); }
+public String displayBranhs()
+{
+string all = null;
+for (int i = 0; i < nbbranchs; i++)
+all += "Branch "+i+":\n "+ branchs[i].ToString()+"\n"; return all;
+}
+public override string ToString()
+{return "Bank Name: " + this.Name + " \n Bank code: " + this.Bankcode;}
+}
+
+public class Program {
+static void Main(string[] args)
+{ // by user & set & get delete test
+Bank B1 = new Bank("alrajhi","1234");
+Branch Branch1 = new Branch("alhamra","Riyadh",111); 
+Branch Branch2 = new Branch("aldhahran","Dammam",3333);
+Branch Branch3 = new Branch("almalqa","Riyadh",222);
+ B1.addBranch(Branch1); // of alrajhi bank 2 Branchs
+B1.addBranch(Branch2);
+Console.WriteLine("\n Bank Informations"); Console.WriteLine("******************"); Console.WriteLine(B1);
+Console.WriteLine("Branch Info");
+Console.WriteLine(Branch1); 
+Console.WriteLine(Branch2));
+B1.addBranch(Branch2);
+Console.ReadKey();
+ Console.WriteLine(B1.displayBranch));
+B1.RemoveBranh(Branch3);
+(Console.WriteLine(B1.displayBranch)); 
+}
+}
+}
