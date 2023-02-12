@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace H.WLab7
+{
+    public class Student
+    {
+        private string first;
+        private string last;
+        private int id;
+        private double gpi;
+        public string First { get { return first; } set { first = value; } }
+        public string Last { get { return last; } set { last = value; } }
+        public int ID { get { return id; } set { id = value; } }
+        public double GPI { get { return gpi; } set { gpi = value; } }
+        public Student(string first, string last, int id, double gpi)
+        {
+            First = first;
+            Last = last;
+            ID = id;
+            GPI = gpi;
+        }
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2} {3}", First, Last, ID, GPI); 
+        }
+    }
+    public class Program 
+    {
+        static void Main(string[] args)
+        {
+            Student s1 = new Student("Maha", "Muhammed", 435690032, 3.51);  // 6 object 
+            Student s2 = new Student("Nourah", "Ahmed", 436600934, 4.98);
+            Student s3 = new Student("Rania", "Muhammed", 435600031, 2.5);
+            Student s4 = new Student("Arwa", "Ali", 435620934, 1.98);
+            Student s5 = new Student("Sarah", "Kareem", 437600042, 3.59);
+            Student s6 = new Student("Shaden", "Abdullah", 438000803, 4.35);
+
+            Student[] datasource = new Student[] { s1, s2, s3, s4, s5, s6 }; // array of objects
+
+            var q1 = from student in datasource    
+                     orderby student.First ascending
+                            select student;
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Students sorted by first name in ascending order"); 
+            Console.WriteLine("------------------------------------------");
+
+            foreach (var i in q1) // 
+                Console.WriteLine(i);
+
+
+            var q2 = from student in datasource
+                            orderby student.GPI descending
+                            select student;
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Students sorted by GPI in descending order");
+            Console.WriteLine("------------------------------------------");
+
+            foreach (var i in q2)
+                Console.WriteLine(i);
+
+            var q3 = from student in datasource
+                            where student.GPI < 2
+                            select student;
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Students whose their GPI less than 2 ");
+            Console.WriteLine("------------------------------------------");
+
+            foreach (var i in q3)
+                Console.WriteLine(i);
+
+            var q4 = from student in datasource
+                            where student.GPI <= 4.5 && student.GPI >= 3
+                            select student;
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Students whose their GPI between 3.0 and 4.5 ");
+            Console.WriteLine("------------------------------------------");
+
+            foreach (var i in q4)
+                Console.WriteLine(i);
+
+
+            var q5 = from student in datasource
+                            where student.Last[0] == 'A'
+                            select student;
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("last names which start with A  ");
+            Console.WriteLine("------------------------------------------");
+
+            foreach (var i in q5)
+                Console.WriteLine(i);
+
+        }
+    }
+}
