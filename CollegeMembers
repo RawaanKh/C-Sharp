@@ -1,0 +1,97 @@
+using System;
+namespace lab5
+{
+    public  class StaffMember
+    {
+        public string firstName;
+        public string lastName;
+        public int staffID;
+ public int weeklyLoad;
+public StaffMember(String firstName, String lastName, int staffID, int weeklyLoad)
+{
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.staffID = staffID;
+    this.weeklyLoad = weeklyLoad;
+}
+public int CalculateMonthlyLoad()
+{
+    return this.weeklyLoad * 4;
+}
+public override string ToString() {
+return "First name : " + this.firstName + " Last name : " + this.lastName + " Staff ID: " + this.staffID + " weekly Load: " + this.weeklyLoad;
+public  class College
+ {
+     private string name;
+     private string dean;
+     private string location;
+     private  int nbMembers=0;
+     private StaffMember[] members= new StaffMember[20];
+ public void hireAStaff(StaffMember member)
+{
+    bool exists = false;
+    // at least one staff member is hired
+    for (int i = 0; i < nbMembers; i++)
+    {
+        if (members[i].staffID == member.staffID)
+        {
+            exists = true;
+            Console.WriteLine("The staff member has been hired already");
+            break;
+} }
+    if (!exists) {
+        for (int j = 0; j < members.Length; j++)
+        {
+            if (members[j] == null)
+            {
+                members[j] = member;
+                nbMembers++;
+                break;
+} }
+    }
+    Console.ReadKey();
+    }
+   public void dismissAStaff(StaffMember member)
+        {
+            for (int i = 0; i < this.members.Length; i++) {
+                if (members[i] == member)
+                {
+                    members[i] = null;
+                    Console.WriteLine("The staff member with id {0}", member.staffID + "
+is not working on the college anymore");
+                    nbMembers--;
+break; }
+        }
+            Console.ReadKey();
+            }
+            
+            
+            public College(string name, string dean, string location)
+{
+    this.name = name;
+    this.dean = dean;
+    this.location = location;
+}
+public String displaymembers()
+{
+    string all = null;
+    for (int i = 0; i < nbMembers; i++)
+        all +=  "Member "+i+":\n "+ members[i].ToString()+"\n";
+    return all;
+    }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+StaffMember member1 = new StaffMember("Manal", "Ahmed", 2351, 7); StaffMember member2 = new StaffMember("Nora", "mohamed", 2381, 10); College college = new College("College of Computer Sciences and
+Information Systems", "dr.Hanan Abdullah", "Riyadh");
+college.hireAStaff(
+college.hireAStaff(member2);
+Console.WriteLine(college.displaymembers());
+college.hireAStaff(member1);
+college.dismissAStaff(member1);
+}
+}
+}
+
